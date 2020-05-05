@@ -95,6 +95,7 @@ def generate_sudoku(level):
     return blank_board
 
 
+# Sample Sudoku
 sudoku1 = [[0,0,3,0,0,0,0,0,0],
           [5,8,0,2,0,0,3,0,9],
           [2,0,0,4,0,5,8,7,1],
