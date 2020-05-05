@@ -35,6 +35,7 @@ def print_board(board):
                 print('?', end = ' ')
         print('')
 
+
 def find_empty_cell(board):
     for i in range(len(board)):
         for j in range(len(board[i])):
