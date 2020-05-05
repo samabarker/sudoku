@@ -108,18 +108,18 @@ sudoku1 = [[0,0,3,0,0,0,0,0,0],
 
 
 # SOLVE (UNCOMMENT BELOW)
-#solved = solve_puzzle(sudoku1)
-#if solved == True:
-#    print_board(sudoku1)
-#else:
-#    print('Unable to solve')
+solved = solve_puzzle(sudoku1)
+if solved == True:
+    print_board(sudoku1)
+else:
+    print('Unable to solve')
 
 
 # GENERATE
-level = 4        # levels 1-4, 1 = easy, 4 = hard
-sudoku2 = generate_sudoku(level)
-print_board(sudoku2)
-print('')
-print('')
-solve_puzzle(sudoku2)
-print_board(sudoku2)
+#level = 4        # levels 1-4, 1 = easy, 4 = hard
+#sudoku2 = generate_sudoku(level)
+#print_board(sudoku2)
+#print('')
+#print('')
+#solve_puzzle(sudoku2)
+#print_board(sudoku2)
