@@ -66,6 +66,32 @@ def check_valid(pos, num, board):
     return True
 
 
+def final_check(board):
+    check_list = [1,2,3,4,5,6,7,8,9]
+
+    for i in board:
+        if sorted(i) != check_list:
+            return False
+    
+    for i in range(len(board)):
+        col_vals = []
+        for j in range(len(board[i])):
+            col_vals.append(board[j][i])
+        if sorted(col_vals) != check_list:
+            return False
+
+    for z in range(3):
+        for k in range(3):
+            box_list = []
+            for i in range(3):
+                for j in range(3):
+                    box_list.append(board[k*3 + i][z*3 + j])
+            if sorted(box_list) != check_list:
+                return False
+
+    return True
+
+
 def solve_puzzle(board, list_of_nums = [1,2,3,4,5,6,7,8,9]):
     if find_empty_cell(board):
         pos = find_empty_cell(board)
@@ -130,6 +156,8 @@ if __name__ == '__main__':
                     try:
                         this_row = input('Please input row ' + str(i + 1) + '. Do not separate numbers. Use 0 for unknown values.')
                         this_row_int = int(this_row)
+                        if len(this_row) > 9:
+                            raise Exception('Too Many Numbers')
                         for j in range(0,9):
                             this_list[j] = int(this_row[j]) 
                         break
@@ -143,7 +171,10 @@ if __name__ == '__main__':
             print('')
             solved = solve_puzzle(sudoku)
             if solved == True:
-                print_board(sudoku)
+                if final_check(sudoku):
+                    print_board(sudoku)
+                else:
+                    print('User input was not valid - it did not follow the rules of Sudoku.')
             else:
                 print('Unable to solve')
             print('')
