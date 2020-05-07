@@ -62,16 +62,15 @@ def check_valid(pos, num, board):
         for j in range(3):
             if board[box_row * 3 + i][box_col * 3 + j] == num:
                 return False
+    
     return True
 
 
-def solve_puzzle(board):
+def solve_puzzle(board, list_of_nums = [1,2,3,4,5,6,7,8,9]):
     if find_empty_cell(board):
         pos = find_empty_cell(board)
     else:
         return True
-
-    list_of_nums = random_list()
 
     for i in list_of_nums:
         if check_valid(pos, i, board):
@@ -86,7 +85,7 @@ def solve_puzzle(board):
 
 def generate_sudoku(level):
     blank_board = draw_board()
-    solve_puzzle(blank_board)
+    solve_puzzle(blank_board, random_list())
     list_of_nums = random_list(80)
     to_remove = [30,40,50,60]
 
@@ -96,31 +95,59 @@ def generate_sudoku(level):
     return blank_board
 
 
-# Sample Sudoku
-sudoku1 = [[0,0,3,0,0,0,0,0,0],
-          [5,8,0,2,0,0,3,0,9],
-          [2,0,0,4,0,5,8,7,1],
-          [3,7,0,0,1,0,5,9,0],
-          [8,0,0,7,4,0,1,3,0],
-          [0,2,9,0,0,8,0,0,0],
-          [6,0,0,1,0,3,4,0,7],
-          [4,0,2,0,6,0,0,0,0],
-          [0,0,0,5,2,4,6,8,0]]
-
-
-# SOLVE (UNCOMMENT BELOW)
-solved = solve_puzzle(sudoku1)
-if solved == True:
-    print_board(sudoku1)
-else:
-    print('Unable to solve')
-
-
-# GENERATE
-#level = 4        # levels 1-4, 1 = easy, 4 = hard
-#sudoku2 = generate_sudoku(level)
-#print_board(sudoku2)
-#print('')
-#print('')
-#solve_puzzle(sudoku2)
-#print_board(sudoku2)
+if __name__ == '__main__':
+    print('Welcome to Sudoku!')
+    print('--------------------')
+    while True:
+        get_option = input('Woud you like to generate a Sudoku or solve a Sudoku? (g/s/q)')
+        if get_option == 'g':
+            while True:
+                get_level = input('Please pick a difficulty level 1-4.')
+                try:
+                    if int(get_level) in range(1,5):
+                        sudoku = generate_sudoku(int(get_level))
+                        print('')
+                        print_board(sudoku)
+                        print('')
+                        get_solution = input('Would you like to show the solution? (y/n)')
+                        if get_solution == 'y':
+                            print('')
+                            solve_puzzle(sudoku)
+                            print_board(sudoku)
+                            print('')
+                            break
+                        else:
+                            break
+                    else:
+                        print('Incorrect selection - please pick a difficulty level.')
+                except:
+                    print('Incorrect selection - please pick a difficulty level.')
+        elif get_option == "s" :
+            sudoku = []
+            for i in range(0,9):
+                this_list = [0,0,0,0,0,0,0,0,0]
+                while True:
+                    try:
+                        this_row = input('Please input row ' + str(i + 1) + '. Do not separate numbers. Use 0 for unknown values.')
+                        this_row_int = int(this_row)
+                        for j in range(0,9):
+                            this_list[j] = int(this_row[j]) 
+                        break
+                    except:
+                        print('Incorrect input.')
+                sudoku.append(this_list)
+            print('')
+            print_board(sudoku)
+            print('')
+            print('Solving...')
+            print('')
+            solved = solve_puzzle(sudoku)
+            if solved == True:
+                print_board(sudoku)
+            else:
+                print('Unable to solve')
+            print('')
+        elif get_option == "q":
+            break
+        else:
+            continue                
