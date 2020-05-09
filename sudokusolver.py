@@ -125,7 +125,7 @@ if __name__ == '__main__':
     print('Welcome to Sudoku!')
     print('--------------------')
     while True:
-        get_option = input('Woud you like to generate a Sudoku or solve a Sudoku? (g/s/q)')
+        get_option = input('Would you like to generate a Sudoku or solve a Sudoku? (g/s/q)')
         if get_option == 'g':
             while True:
                 get_level = input('Please pick a difficulty level 1-4.')
